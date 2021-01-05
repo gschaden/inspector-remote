@@ -76,7 +76,10 @@ class RemoteSession extends EventEmitter {
 
       Log(`target url for remote session: ${targetURL}`)
 
-      const wsClient = new WebSocketClient()
+      const wsClient = new WebSocketClient({
+        maxReceivedFrameSize: 100000000,
+        maxReceivedMessageSize: 100000000,
+      })
 
       wsClient.on('connect', (wsConnection) => {
         Log(`connected to websocket`)
