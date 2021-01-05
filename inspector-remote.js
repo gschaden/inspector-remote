@@ -163,7 +163,10 @@ class RemoteSession extends InspectorSession {
     const targetUrl = await getTargetUrl(this._url)
 
     Log(`target url for remote session: ${targetUrl}`)
-    const ws = new WebSocket(targetUrl)
+    const ws = new WebSocket(targetUrl, {
+      maxReceivedFrameSize: 100000000,
+      maxReceivedMessageSize: 100000000,
+    })
 
     ws.once('open', () => {
       Log(`connected to websocket`)
